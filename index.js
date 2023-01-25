@@ -23,4 +23,3 @@ function getRndInteger(min, max) {
         console.log(`Você escolheu impar e o computador escolheu par. O resultado foi ${numeroAleatorioEntreZeroeDez}. Você perdeu!`)
     }
   }
-  
