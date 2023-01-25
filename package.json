@@ -1,0 +1,24 @@
+{
+  "name": "labecommerce-backend",
+  "version": "1.0.0",
+  "description": "intro-back",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js bananinha",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maumau1998/labecommerce-backend.git"
+  },
+  "keywords": [
+    "back-end"
+  ],
+  "author": "Mauricio Leite Silva",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/maumau1998/labecommerce-backend/issues"
+  },
+  "homepage": "https://github.com/maumau1998/labecommerce-backend#readme"
+}
