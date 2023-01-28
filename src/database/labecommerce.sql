@@ -119,3 +119,31 @@ WHERE id = "p001";
 SELECT * FROM users
 INNER JOIN purchases
 ON purchases.buyer_id = users.id;
+
+-- Relações SQL II
+
+CREATE TABLE purchases_products (
+    purchase_id TEXT NOT NULL,
+    product_id TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    FOREIGN KEY (purchase_id) REFERENCES purchases(id),
+    FOREIGN KEY (product_id) REFERENCES products(id)
+);
+
+INSERT INTO purchases_products (purchase_id, product_id, quantity)
+VALUES
+ ("pu05", "p005", 1),
+ ("pu05", "p001", 1),
+ ("pu06", "p002", 1);
+
+ SELECT * FROM purchases_products;
+
+SELECT purchases.id AS purchasesId,
+products.id AS productsId,
+products.name,
+purchases_products.quantity
+FROM purchases_products
+INNER JOIN purchases 
+ON purchases_products.purchase_id = purchasesId
+INNER JOIN products
+ON purchases_products.product_id = productsId;
