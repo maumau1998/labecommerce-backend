@@ -25,11 +25,11 @@ CREATE TABLE products (
 SELECT * FROM products;
 
 INSERT INTO products (id, name, price, category)
-VALUES ("p001", "Coca-cola", 10, "Bebida"),
+VALUES ("p001", "Coca-cola", 11, "Bebida"),
 ("p002", "Banana", 8, "Fruta"),
-("p003", "Birinight", 10, "Bebida"),
+("p003", "Birinight", 12, "Bebida"),
 ("p004", "Arroz", 25, "Produto"),
-("p005", "feijão", 10, "Produto" );
+("p005", "feijão", 13, "Produto" );
 
 DROP TABLE products;
 
@@ -88,3 +88,34 @@ WHERE
        AND price <= 1000
 
 ORDER BY price ASC;
+
+-- Relações SQL I
+
+CREATE TABLE purchases (
+    id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    total_price REAL UNIQUE NOT NULL,
+    paid INTEGER NOT NULL,
+    delivered_at TEXT,
+    buyer_id TEXT NOT NULL,
+    FOREIGN KEY (buyer_id) REFERENCES users(id)
+);
+
+DROP Table purchases;
+
+INSERT INTO purchases (id, total_price, paid, buyer_id)
+VALUES ("p001", 11, 0, "u001"),
+  ("p002", 8, 0, "u001" ),
+  ("p003", 12, 0, "u002"),
+  ("p004", 25, 0, "u002" ),
+  ("p005", 13, 0, "u003");
+
+SELECT * FROM purchases;
+
+UPDATE purchases
+SET paid = 1,
+    delivered_at = DATETIME("now")
+WHERE id = "p001";
+
+SELECT * FROM users
+INNER JOIN purchases
+ON purchases.buyer_id = users.id;
