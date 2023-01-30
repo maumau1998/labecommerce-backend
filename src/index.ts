@@ -592,3 +592,69 @@ app.put("/products/:id", (req: Request, res: Response) => {
         res.send(error.message)
     }
 })
+
+// aprofundando-knex
+
+app.get('/purchases/:id', async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id as string
+
+        if(id.length < 5) {
+            res.status(400)
+            throw new Error("'id' deve possuir pelo menos 5 caracteres.");
+        }
+
+        const [ purchase ]: TPurchase[] = await db("purchases").where({ id: id })
+
+        if(purchase){
+            
+            const [ cart ] = await db("purchases")
+            .select(
+                "purchases.id AS purchaseId",
+                "purchases.total_price AS totalPrice",
+                "purchases.created_at AS createdAt",
+                "purchases.paid AS isPaid",
+                "users.id AS buyerId",
+                "users.email",
+                "users.name"
+            )
+            .innerJoin("users", "purchases.buyer_id", "=", "users.id")
+
+            const purchaseProducts = await db("purchases_products")
+            .select(
+                "purchases_products.product_id AS id",
+                "products.name",
+                "products.price",
+                "products.description",
+                "products.image_url AS urlImage",
+                "purchases_products.quantity"
+            )
+            .innerJoin("products","products.id","=","purchases_products.product_id")
+
+            const result = { 
+                ...cart, 
+                productsList: purchaseProducts 
+            }
+            
+            console.log(result)
+            res.status(200).send(result)
+
+        }else{
+            res.status(404)
+            throw new Error("Compra não existe no banco de dados.")            
+        }       
+
+    } catch (error: any) {
+        console.log(error)
+
+        if (req.statusCode === 200) {
+            res.status(500)
+        }
+
+        if (error instanceof Error) {
+            res.send(error.message)
+        } else {
+            res.send("Erro inesperado")
+        }
+    }
+})
