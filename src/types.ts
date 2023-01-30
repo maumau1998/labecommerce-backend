@@ -1,6 +1,6 @@
 export type TUser = {
   id: string,
-  name: string | number
+  name: string,
   email: string,
   password: string | number
 }

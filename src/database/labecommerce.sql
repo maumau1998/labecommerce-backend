@@ -2,16 +2,17 @@
 
 CREATE TABLE users (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
+    name TEXT NOT NULL,
     email TEXT UNIQUE NOT NULL,
     password TEXT NOT NULL
 );
 
 SELECT * FROM users;
 
-INSERT INTO users (id, email, password)
-VALUES ("u001", "kemilly@gmail.com", "kemilly123"),
-("u002", "cinara@gmail.com", "cinara123"),
-("u003", "mariana@gmail.com", "mariana123");
+INSERT INTO users (id,name, email, password)
+VALUES ("u001","kemilly", "kemilly@gmail.com", "kemilly123"),
+("u002","cinara", "cinara@gmail.com", "cinara123"),
+("u003","mariana", "mariana@gmail.com", "mariana123");
 
 DROP TABLE users;
 

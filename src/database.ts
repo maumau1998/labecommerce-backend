@@ -2,11 +2,13 @@ import { TUser, TProduct, TPurchase, CATEGORY } from "./types";
 
 export const Users: TUser[] = [{
    id: "u001",
+   name: "mauricio",
    email: "mauricioleite85@gmail.com",
    password: "mauricio123"
 },
 {
    id: "u002",
+   name: "astrodev",
    email: "astrodev85@gmail.com",
    password: "astrodev123"  
 }]
@@ -39,9 +41,10 @@ export const Purchase: TPurchase[] = [{
 
 // função para users
 
-export function createUser(id:string, email:string, password:string|number): TUser[]{
+export function createUser(id:string, name: string, email:string, password:string|number): TUser[]{
     const novoUsuario = {
         id: id,
+        name: name,
         email: email,
         password: password
     }
